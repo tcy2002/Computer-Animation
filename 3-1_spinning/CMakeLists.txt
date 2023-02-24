@@ -1,6 +1,6 @@
 
 cmake_minimum_required(VERSION 3.1)
-project(4-2_collision)
+project(3-1_spinning)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/../cmake)
 set(CMAKE_CXX_FLAGS "-Wall")
