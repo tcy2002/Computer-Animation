@@ -12,7 +12,7 @@ Install **Git** and build system **Cmake**. For windows user, MSVC need to be in
 
 Clone this repo (together with the submodule `libigl`):
 ```
-git clone --recursive http://dalab.se.sjtu.edu.cn/gitlab/courses/ca-framework-2022.git
+git clone --recursive http://dalab.se.sjtu.edu.cn/gitlab/courses/ca-framework.git
 # if you forget clone submodule at first place
 git submodule update --init --recursive
 ``` 
