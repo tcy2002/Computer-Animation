@@ -28,7 +28,7 @@ cmake ..
 
 Cmake will generate Microsft visual studio project. Click the `*.sln` file to open the project and build.
 
-### For linux
+### For Linux
 
 Compile and run the executable, e.g. Ubuntu:
 ```
@@ -58,9 +58,9 @@ Rename your compressed file following the rule *`NAME_ID_XXX`*.
 
     This may caused by problem of accessing github. Please first try use [SJTU VPN](!https://net.sjtu.edu.cn/wlfw/VPN.htm) and compile. 
 
-    ~~Also, some repos are available on our own server, such as *Eigen*. The download info of libigl dependencies is located at file `libigl/cmake/LibiglDownloadExternal.cmake`. For example, you can change the link at line 70 to `http://dalab.se.sjtu.edu.cn/gitlab/xiaoyuwei/eigen.git` use eigen mirror repo at DALAB server.~~
+    Also, some repos are available on our own server, such as *Eigen*. The download info of libigl dependencies is located at file `libigl/cmake/LibiglDownloadExternal.cmake`. For example, you can change the link at line 70 to `http://dalab.se.sjtu.edu.cn/gitlab/xiaoyuwei/eigen.git` use eigen mirror repo at DALAB server.~~
 
-    ~~glfw (http://dalab.se.sjtu.edu.cn/gitlab/xiaoyuwei/glfw.git) and imgui (http://dalab.se.sjtu.edu.cn/gitlab/xiaoyuwei/imgui.git) are also available on our server.~~
+    glfw (http://dalab.se.sjtu.edu.cn/gitlab/xiaoyuwei/glfw.git) and imgui (http://dalab.se.sjtu.edu.cn/gitlab/xiaoyuwei/imgui.git) are also available on our server.~~
 
 * The menu bar isn't rendered correctly in Release mode using VS2019.
 
