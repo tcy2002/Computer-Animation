@@ -28,6 +28,13 @@ cmake ..
 
 Cmake will generate Microsft visual studio project. Click the `*.sln` file to open the project and build.
 
+### For Mac
+
+Compile and run the executable:
+```
+make && ./0_dummy/0_dummy
+```
+
 ### For Linux
 
 Compile and run the executable, e.g. Ubuntu:
