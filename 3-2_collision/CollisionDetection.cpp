@@ -119,6 +119,8 @@ void CollisionDetection::computeNarrowPhase(int narrowPhaseMethod) {
                         }
                     }
                 }
+                m_penetratingVertices.clear();
+                m_penetratingEdges.clear();
             }
 
             // look for vertexFace
