@@ -40,6 +40,7 @@ void DummySim::updateRenderGeometry() {
 
 bool DummySim::advance() {
 	// do next step of some color animation
+	// update the color
 	int speed = 60;
 	int decColor = (m_step / speed) % 3;
 	int incColor = (decColor + 1) % 3;
@@ -48,6 +49,9 @@ bool DummySim::advance() {
 		m_C(i, decColor) = (m_C(i, decColor) * speed - 1) / speed;
 		m_C(i, incColor) = (m_C(i, incColor) * speed + 1) / speed;
 	}
+
+	// TODO: update m_V (and m_F maybe) here
+
 
 	// advance step
 	m_step++;
