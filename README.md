@@ -2,7 +2,7 @@
 
 ## Overview
 
-Code framework for course exercise.
+Code framework for omputer Animation course.
 
 ## Installation
 

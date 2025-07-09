@@ -20,7 +20,7 @@ class SpringGui : public Gui {
 
     SpringSim *p_springSim = NULL;
 
-    const vector<char const *> m_integrators = {"Analytic", "Explicit Euler", "Symplectic Euler", "Midpoint"};
+    const vector<char const *> m_integrators = {"Analytic", "Explicit Euler", "Symplectic Euler", "Midpoint", "RK4"};
     int m_selected_integrator = 0;
 
     SpringGui() {

@@ -109,6 +109,9 @@ public:
             case 2:
                 m_color = Eigen::RowVector3d(0.0, 0.0, 1.0);
                 break;
+            case 3:
+                m_color = Eigen::RowVector3d(1.0, 1.0, 0.0);
+                break;
             default:
                 std::cerr << m_method << " is not a valid integrator method."
                           << std::endl;

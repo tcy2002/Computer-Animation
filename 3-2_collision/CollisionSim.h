@@ -21,8 +21,8 @@ class CollisionSim : public Simulation {
 		path = "cube_shallow.off";
 		for (int i = 0; i < 5; ++i) {
 			m_objects.push_back(RigidObject(path));
-		}
-		
+        }
+        
         m_collisionDetection.setObjects(m_objects);
 
         m_dt = 1e-3 * 3;
@@ -106,13 +106,13 @@ class CollisionSim : public Simulation {
     }
 
     virtual bool advance() override {
-        // compute the collision detection
-        m_collisionDetection.computeCollisionDetection(m_broadPhaseMethod, m_narrowPhaseMethod, m_eps);
-
         // apply forces (only gravity in this case)
         for (auto &o : m_objects) {
             o.applyForceToCOM(m_gravity);
         }
+
+        // compute the collision detection
+        m_collisionDetection.computeCollisionDetection(m_broadPhaseMethod, m_narrowPhaseMethod, m_eps);
 
         for (auto &o : m_objects) {
             // integrate velocities
@@ -232,6 +232,8 @@ class CollisionSim : public Simulation {
 
     void setMass(double m) { m_mass = m; }
 
+    void setFriction(double f) { m_friction = f; m_collisionDetection.m_friction = f; }
+
     void showContacts(bool s) {
         if (!s) {
             m_contactMemory.clear();
@@ -286,6 +288,7 @@ class CollisionSim : public Simulation {
     double m_angle;
     double m_force;
     double m_mass;
+    double m_friction;
 
     Eigen::Vector3d m_gravity;
 

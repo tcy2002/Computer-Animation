@@ -19,7 +19,7 @@ class CannonBallGui : public Gui {
     CannonBallSim *p_cannonBallSim = NULL;
 
     const vector<char const *> m_integrators = {"Analytic", "Explicit Euler",
-                                                "Symplectic Euler"};
+                                                "Symplectic Euler", "RK4"};
     int m_selected_integrator = 0;
 
     CannonBallGui() {

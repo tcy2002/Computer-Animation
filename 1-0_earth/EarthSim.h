@@ -47,10 +47,12 @@ public:
 
 	virtual bool advance() override {
         // TODO update p_moon
-        
-        // update m_time
-        // update m_step
+        auto earthPos = p_earth->getPosition();
+        auto moonPos = earthPos + Eigen::Vector3d(cos(getTime()), 0, sin(getTime())) * m_radius;
+        p_moon->setPosition(moonPos);
 
+        m_step++;
+        m_time += m_dt;
         return false;
     }
 

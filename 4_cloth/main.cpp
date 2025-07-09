@@ -10,22 +10,24 @@ class ClothGui : public Gui {
    public:
     // simulation parameters
     float m_dt = 1e-2;
-    int n = 10, m = 10;
+    int n = 32, m = 32;
     double mass = 1;
     double domainX = 5;
     int m_log_frequency = 30;
+    double friction = 0.5;
+    double restitution = 0.3;
 
     Spring m_spring;  // stores properties of the spring
     ClothSim *p_clothSim = NULL;
-    const vector<char const *> m_integrators = {"Explicit Euler", "Implicit Euler", "Combination"};
+    const vector<char const *> m_integrators = {"Explicit Euler", "Implicit Euler", "Semi-Implicit Euler", "Combination"};
     int m_selected_integrator = 0;
 
 
     ClothGui() {
         m_spring.damping = 10;
-        m_spring.k_struct = 3000;
-        m_spring.k_shear = 1000;
-        m_spring.k_bend = 500;
+        m_spring.k_struct = 30000;
+        m_spring.k_shear = 10000;
+        m_spring.k_bend = 5000;
 
         // initialize the pendulum to be used
         p_clothSim = new ClothSim();
@@ -46,6 +48,8 @@ class ClothGui : public Gui {
         p_clothSim->setTimestep(m_dt);
         p_clothSim->setLogFrequency(m_log_frequency);
         p_clothSim->setMethod(m_selected_integrator);
+        p_clothSim->setFriction(friction);
+        p_clothSim->setRestitution(restitution);
         p_clothSim->m_mass = mass;
         p_clothSim->n = n;
         p_clothSim->m = m;
@@ -67,6 +71,8 @@ class ClothGui : public Gui {
         ImGui::InputDouble("shear stiffness", &m_spring.k_shear, 0, 0);
         ImGui::InputDouble("bend stiffness", &m_spring.k_bend, 0, 0);
         ImGui::InputDouble("damping", &m_spring.damping, 0, 0);
+        ImGui::InputDouble("friction", &friction, 0, 0);
+        ImGui::InputDouble("restitution", &restitution, 0, 0);
         ImGui::InputFloat("dt", &m_dt, 0, 0);
         ImGui::Combo("Integrator", &m_selected_integrator, m_integrators.data(), m_integrators.size());
         ImGui::InputInt("Log Frequency", &m_log_frequency, 0, 0);

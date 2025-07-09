@@ -23,6 +23,7 @@ public:
         m_log_frequency = 30;
 		m_radius = 10;
         m_gravity << 0, -9.81, 0;
+        m_k = 100.0;
 
 		reset();
 	}
@@ -82,6 +83,7 @@ private:
     RigidObject *p_bead;
     double m_radius;
     double m_mass;
+    double m_k;
 
     Eigen::Vector3d m_gravity;
 

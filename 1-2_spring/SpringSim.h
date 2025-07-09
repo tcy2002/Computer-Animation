@@ -113,6 +113,9 @@ public:
             case 3:
                 m_color = Eigen::RowVector3d(1.0, 1.0, 0.0);
                 break;
+            case 4:
+                m_color = Eigen::RowVector3d(0.0, 1.0, 1.0);
+                break;
             default:
                 std::cerr << m_method << " is not a valid integrator method."
                           << std::endl;
@@ -136,7 +139,7 @@ public:
 #pragma endregion SettersAndGetters
 
 private:
-    int m_method;  // id of integrator to be used (0: analytical, 1: explicit euler, 2: semi-implicit euler, 3: midpoint)
+    int m_method;  // id of integrator to be used (0: analytical, 1: explicit euler, 2: semi-implicit euler, 3: midpoint, 4: RK4)
     double m_mass;
 
     Eigen::Vector3d m_gravity;

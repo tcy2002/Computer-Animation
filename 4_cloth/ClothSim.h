@@ -38,7 +38,7 @@ public:
 
         m_dt = 1e-2;
         m_gravity << 0, -9.81, 0;
-        n = 10, m = 10;
+        n = 32, m = 32;
         domainX = 5;
         dx = domainX / (n-1);
 
@@ -48,7 +48,7 @@ public:
     }
 
     virtual void resetMembers() override {
-        double domainY = dx * (m-1);
+        double domainY = dx * (m-1) / 2;
         // initialize fixed point visualizations
         p1->reset(); p2->reset();
         p1->setScale(0.01); p2->setScale(0.01);
@@ -70,7 +70,13 @@ public:
         fixedParticleIdx[1] = particleCoordinateToIdx(n-1, 0);
         isFixedParticle.resize(n*m, false);
         isFixedParticle[particleCoordinateToIdx(0, 0)] = true;
+        isFixedParticle[particleCoordinateToIdx(1, 0)] = true;
+        isFixedParticle[particleCoordinateToIdx(0, 1)] = true;
+        isFixedParticle[particleCoordinateToIdx(1, 1)] = true;
+        isFixedParticle[particleCoordinateToIdx(n-2, 0)] = true;
         isFixedParticle[particleCoordinateToIdx(n-1, 0)] = true;
+        isFixedParticle[particleCoordinateToIdx(n-1, 1)] = true;
+        isFixedParticle[particleCoordinateToIdx(n-2, 1)] = true;
 
         // initialize cloth mesh triangles
         std::vector<std::vector<int>> faces;
@@ -144,6 +150,8 @@ public:
 
     void setMethod(int m) { m_method = m; }
     void setSpring(Spring &s) { m_spring = s; }
+    void setFriction(double f) { friction = f; }
+    void setRestitution(double r) { restitution = r; }
     void setLogFrequency(int f) { m_log_frequency = f; }
     int n, m;
     double m_mass;
@@ -165,6 +173,8 @@ private:
 
     Spring m_spring;
     RigidObject *p1, *p2;
+    double friction;
+    double restitution;
 
     std::vector<int> fixedParticleIdx;
     std::vector<bool> isFixedParticle;

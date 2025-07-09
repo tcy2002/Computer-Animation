@@ -26,7 +26,14 @@ class CollisionDetection {
     CollisionDetection(std::vector<RigidObject>& world) : m_objects(world) {}
 
     // pass objects in scene to collision detection
-    void setObjects(std::vector<RigidObject>& world) { m_objects = world; }
+    void setObjects(std::vector<RigidObject>& world) { 
+        m_objects = world;
+        m_sortedObjects.clear();
+        m_sortedObjects.reserve(m_objects.size());
+        for (auto& o : m_objects) {
+            m_sortedObjects.push_back(&o);
+        }
+    }
 
 	void computeBroadPhase(int broadPhaseMethod);
 
@@ -160,6 +167,8 @@ class CollisionDetection {
     std::vector<Contact> getContacts() { return m_contacts; }
 
     std::vector<RigidObject>& m_objects;  // all objects in scene
+    std::vector<RigidObject*> m_sortedObjects;
+
     // result of broadphase, pairs of objects with possible collisions
     std::vector<std::pair<size_t, size_t>> m_overlappingBodys;
 
@@ -171,6 +180,8 @@ class CollisionDetection {
 
     // computed contact points
     std::vector<Contact> m_contacts;
+
+    double m_friction = 0.3;  // friction coefficient
 };
 
 #endif

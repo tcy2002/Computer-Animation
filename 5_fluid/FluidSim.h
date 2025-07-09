@@ -27,6 +27,8 @@ public:
 		m_vScale = 20;
 		m_windOn = false;
 
+		p_solidObstacle = new Grid2(m_res_x, m_res_y, m_dx);
+		p_solidObstacle->applySource(0.45, 0.55, 0.4, 0.45); // add an obstacle here
 		p_density = new Grid2(m_res_x, m_res_y, m_dx);
 		p_density_tmp = new Grid2(m_res_x, m_res_y, m_dx);
 		p_pressure = new Grid2(m_res_x, m_res_y, m_dx);
@@ -41,6 +43,9 @@ public:
 	}
 
 	virtual void resetMembers() override {
+		p_solidObstacle->reset();
+		p_solidObstacle->applySource(0.45, 0.55, 0.4, 0.45);
+		m_boundaryPressure.clear();
 		p_density->reset();
 		p_density->applySource(0.45, 0.55, 0.1, 0.15);
 		p_pressure->reset();
@@ -148,7 +153,7 @@ public:
 	
 	void solvePressure() {
 		// copy out the boundaries 
-		setNeumann();
+		// setNeumann();
 		setZero();
 
 		computeDivergence();
@@ -280,6 +285,9 @@ private:
 	bool m_velocityOn;
 	double m_vScale;
 	bool m_windOn;
+
+	Grid2* p_solidObstacle;
+	std::map<std::pair<int, int>, std::tuple<double, double, double, double>> m_boundaryPressure;
 
 	Grid2* p_density;
 	Grid2* p_density_tmp;

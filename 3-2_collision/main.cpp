@@ -5,19 +5,20 @@
 class CollisionGui : public Gui {
    public:
     float m_angle = 1.047f;
-    float m_force = 10.0f;
-    float m_dt = 1e-1 * 3;
+    float m_force = 50.0f;
+    float m_dt = 1e-2;
+    float m_friction = 0.3;
     float m_mass = 1.0;
     bool m_showContacts = false;
     bool m_useAABB = false;
-    float m_eps = 0.6;
+    float m_eps = 0.3;
 
     int m_maxHistory = 200;
     std::vector<float> m_energy_history;
 
-    int m_selectedBroadPhase = 0;
+    int m_selectedBroadPhase = 2;
     const std::vector<char const *> m_broadphases = {"None", "AABB", "Own"};
-    int m_selectedNarrowPhase = 0;
+    int m_selectedNarrowPhase = 1;
     const std::vector<char const *> m_narrowphases = {"Exhaustive", "Own"};
 
     CollisionSim *p_CollisionSim = NULL;
@@ -43,7 +44,10 @@ class CollisionGui : public Gui {
         p_CollisionSim->setAngle(m_angle);
         p_CollisionSim->setTimestep(m_dt);
         p_CollisionSim->setMass(m_mass);
+        p_CollisionSim->setFriction(m_friction);
         p_CollisionSim->setEps(m_eps);
+        p_CollisionSim->setBroadPhaseMethod(m_selectedBroadPhase);
+        p_CollisionSim->setNarrowPhaseMethod(m_selectedNarrowPhase);
     }
 
     virtual void clearSimulation() override {
@@ -55,6 +59,7 @@ class CollisionGui : public Gui {
         ImGui::SliderAngle("Angle", &m_angle, -180.0f, 180.0f);
         ImGui::InputFloat("Force", &m_force, 0, 0);
         ImGui::InputFloat("Mass", &m_mass, 0, 0);
+        ImGui::InputFloat("Friction", &m_friction, 0, 0);
         ImGui::InputFloat("dt", &m_dt, 0, 0);
         if (ImGui::Checkbox("Show contacts", &m_showContacts)) {
             p_CollisionSim->showContacts(m_showContacts);
